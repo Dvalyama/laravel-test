@@ -11,7 +11,7 @@ Route::view('/','welcome');
 
 Route::redirect('/home','/');
 
-//Route::get('/test', TestController::class);
+Route::get('/test', TestController::class);
 
 
 Route::get('register',[RegisterController::class, 'index'])->name('register ');
@@ -47,4 +47,4 @@ Route::prefix('admin')->group(function () {
     Route::put ('posts/{post}/like',[PostController::class, 'like'])->name('admin.posts.like');
     });
 
-   // Route::resource('posts/{post}/coments')
+   
