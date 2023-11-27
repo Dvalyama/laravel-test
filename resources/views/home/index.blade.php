@@ -1,9 +1,7 @@
 @extends('layouts.base')
 
-@section('page.title','Страница входа')
-
 @section('content')
     <h1>
-        Вход
+        Главная страница
     </h1> 
 @endsection

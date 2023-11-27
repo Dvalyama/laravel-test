@@ -1,14 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BlogController;
+use App\Http\Controllers\User\BlogController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\Posts\CommentController;
 
 
-Route::view('/', 'welcome')->name('home');
+Route::view('/', 'home.index')->name('home');
 
 Route::redirect('/home', '/')->name('home.redirect');
 
@@ -16,7 +16,7 @@ Route::redirect('/home', '/')->name('home.redirect');
 Route::get('/test', TestController::class)->name('test')->middleware('token:secret'); 
 
 Route::middleware('guest')->group(function (){
-Route::get('register', [RegisterController::class, 'index'])->name('register.index');
+Route::get('register', [RegisterController::class, 'index'])->name('register');
 Route::post('register', [RegisterController::class, 'store'])->name('register.store');
 
 Route::get('login', [LoginController::class, 'index'])->name('login');

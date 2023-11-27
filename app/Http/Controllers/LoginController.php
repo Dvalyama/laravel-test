@@ -6,13 +6,13 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        // dd(session()->all());
-        // $foo = session('foo');
-        // dd($foo);
-
-        return view('login.index');
+        return view ('login.index');
+    }
+    public function store()
+    {
+        return ('Запрос на вход');
     }
 
 }

@@ -10,8 +10,13 @@ class RegisterController extends Controller
 {
     public function index()
     {
-        return response()->view('register.index');
+        return view ('register.index');
     }
+    public function store()
+    {
+        return ('Запрос на регистрацию');
+    }
+
 }
 
 
