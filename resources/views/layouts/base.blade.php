@@ -4,10 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('page.title',config('app.name'))</title>
+   
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/css/bootstrap.min.css" integrity="sha512-b2QcS5SsA8tZodcDtGRELiGv5SaKSk1vDHDaQRda0htPYWZ6046lr3kJ5bAAQdpV2mmA/4v0wQF9MyU6/pDIAg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        .container{max-width: 720px;}
+        .required::after{content:'*';color:rgb(255, 0, 170);}
+    </style>
+
 </head>
     
-<body class="d-flex flex-column min-vh-100 text-center">
+<body>
+    <div class="d-flex flex-column min-vh-100">
 
     @include('includes.header')
 
