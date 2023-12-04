@@ -17,6 +17,7 @@ class BlogController extends Controller
         ];
 
         $posts = array_fill(0,10,$post);
+        
         return view ('blog.index', compact('posts'));
     }
 
