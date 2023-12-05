@@ -29,9 +29,8 @@
             </x-form-item>
         
             <x-form-item>
-                <x-label required>{{__('Пароль')}}</x-label>
-                <x-input type="password" name="password"/>
-                
+                <x-label for>{{__('Пароль')}}</x-label>
+                <x-input type="password" name="password" id="password"/>
             </x-form-item>
 
             <x-form-item>
@@ -41,12 +40,12 @@
             </x-form-item>
 
             <x-form-item>
-                <x-checkbox name="remember">
+                <x-checkbox name="agreement">
                     {{__('Я согласен на обработку пользовательских данных')}}
                 </x-checkbox>
             </x-form-item>
 
-            <x-button type="submit" size="sm">
+            <x-button type="submit">
                 {{__('Войти')}}
             </x-button>         
         </x-form>        
