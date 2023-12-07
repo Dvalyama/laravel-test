@@ -12,20 +12,10 @@ class LoginController extends Controller
     }
     public function store(Request $request)
     {
-        // $ip=$request->ip();
-        // $path=$request->path();
-
-        // dd($ip,$path);
-
-        // $email=$request->input('email');
-        // $password=$request->input('password');
-        // $remember=$request->boolean('remember');
-       
-        // dd($email,$password,$remember);
-
-        if(true){
-            return redirect()->back()->withInput();
-        }
+        alert(__('Добро пожаловать!'));
+        // if(true){
+        //     return redirect()->back()->withInput();
+        // }
 
         return redirect()->route('user');
     }
