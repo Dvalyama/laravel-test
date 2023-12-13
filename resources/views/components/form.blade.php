@@ -1,16 +1,16 @@
-@props(['method'=>'GET'])
+@props(['method' => 'GET'])
 
-@php($method=strtoupper($method))
-@php($_method=in_array($method,['GET','POST']))
+@php($method = strtoupper($method))
+@php($_method = in_array($method, ['GET', 'POST']))
 
-<form {{$attributes}} method="{{$_method ? $method:'POST'}}">
-    @unless ($_method)
+<form {{ $attributes }} method="{{ $_method ? $method : 'POST' }}">
+    @unless($_method)
         @method($method)
     @endunless
 
-    @if($method !=='GET')
+    @if($method !== 'GET')
         @csrf
     @endif
-    
-    {{$slot}}
+
+    {{ $slot }}
 </form>
