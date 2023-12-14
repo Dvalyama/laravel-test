@@ -28,21 +28,15 @@ class PostController extends Controller
         return view('user.posts.create');
     }    
 
-    public function store(StorePostRequest $request)
-    {
+    public function store(Request $request)
+    {        
+        $validated = validate($request->all(),[
+            'title'=>['required','string','max:100'],
+            'content'=>['required','string','max:1000'],
 
-        $validated = $request->validated();
-        
-        // $validated = $request->validate([
-        //     'title'=>['required','string','max:100'],
-        //     'content'=>['required','string','max:1000'],
-        // ]);
-        
-        // $validated = validator($request->all(),[
-        //     'title'=>['required','string','max:100'],
-        //     'content'=>['required','string','max:1000'],
+        ]);
 
-        // ])->validate();
+
 
         dd($validated);
         
@@ -74,8 +68,13 @@ class PostController extends Controller
 
     public function update(Request $request,$post)
     {
-        $title=$request->input('title');
-        $content=$request->input('content');
+        $validated = validate($request->all(),[
+            'title'=>['required','string','max:100'],
+            'content'=>['required','string','max:1000'],
+
+        ]);
+        
+        dd($validated);
         
         alert(__('Сохранено'));
 
