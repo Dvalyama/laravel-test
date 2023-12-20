@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 
@@ -14,16 +15,18 @@ class RegisterController extends Controller
     }
     public function store(Request $request)
     {
-        // $name=$request->input('name');
-        // $email=$request->input('email');
-        // $password=$request->input('password');
-        // $agreement=$request->boolean('agreement');
-       
-        // dd($name,$email,$password,$agreement);
+       $validated=$request->validate([
+        'name'=>['required','string','max:50'],
+        'email'=>['required','string','max:50','email','unique:users'],
+        'password'=>['required','string','min:7','max:50','confirmed'],
+        'agreement'=>['accepted'],
+       ]);
 
-        if(true){
-            return redirect()->back()->withInput();
-        }
+       $user=User::query()->create([
+        'name'=>$validated['name'],
+        'email'=>$validated['name'],
+        'password'=>bcrypt($validated['password']),
+       ]);
 
         return redirect()->route('user');
     }

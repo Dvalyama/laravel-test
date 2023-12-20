@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\User;
 
+use Carbon\Carbon;
+use App\Models\Post;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
+use Illuminate\Validation\ValidationException;
 
 
 use Illuminate\Http\Request;
@@ -33,12 +37,20 @@ class PostController extends Controller
         $validated = validate($request->all(),[
             'title'=>['required','string','max:100'],
             'content'=>['required','string','max:1000'],
-
+            'published_at'=>['nullable','string','date'],
+            'published'=>['nullable','boolean'],
         ]);
 
+        $post = Post::query()->firstOrCreate([
+            'user_id'=>User::query()->value('id'),
+            'title'=>$validated['title'],
+        ],[
+            'content'=>$validated['content'],
+            'published_at'=> new Carbon($validated['published_at'])?? null,
+            'published'=>$validated['published']?? false,
+        ]);
 
-
-        dd($validated);
+        dd($post->toArray());
         
         alert(__('Сохранено'));
         return redirect()->route('user.posts.show',123);
