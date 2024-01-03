@@ -46,13 +46,16 @@ class BlogController extends Controller
         return view ('blog.index', compact('posts','categories'));
     }
 
-    public function show($post)
+    public function show(Request $request, Post $post)
     {
-        $post= (object) [
-            'id'=>123,
-            'title'=>'Lorem ipsum dolor sit amet.',
-            'content'=>'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est, corporis.',
-        ];
+        // $post=cache()->remember(
+        //     key:"posts.{$post}",
+        //     ttl:now()->addHour(),
+        //     callback:function()use($post){
+        //         return $post=Post::query()->findOrFail($post);
+        //     }
+        // ); работа с кешем без вызова Post
+
         return view ('blog.show',compact('post'));
     }
 
