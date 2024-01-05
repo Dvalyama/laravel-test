@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Carbon;
+
 
 
 
@@ -14,36 +17,41 @@ class BlogController extends Controller
 {
     public function index(Request $request)
     {
-        $categories=[
-            null=>__('Все категории'),
-            1=>__('Первая категория'),
-            2=>__('Вторая категория')
-        ];
-        
-        $posts=Post::query()->get(['id','title','published_at']);
-
-        $posts=Post::query()->limit(12)->get();
-
-        $posts=Post::query()->limit(12)->offset(12)->get();
-
         $validated=$request->validate([
-            'limit'=>['nullable','integer','min:1','max:100'],
-            'page'=>['nullable','integer','min:1','max:100'],
-
+            'search'=>['nullable','string','max:50'],
+            'from_date'=>['nullable','string','date'],
+            'to_date'=>['nullable','string','date','after:from_date'],
+            'tag'=>['nullable','string','max:10'],
         ]);
 
-        $page=$validated['page']??1;
-        $limit=$validated['limit']??12;
-        $offset=$limit*($page-1);
+        $query=Post::query()
+            ->where('published',true)
+            ->whereNotNull('published_at');
 
-        $posts=Post::query()->limit($limit)->offset($offset)->get();
+        if($search=$validated['search']??null){
+            $query->where('title','like',"%{$search}%");    
 
-        $posts=Post::query()->paginate($limit);
+        }
 
-        $posts=Post::query()->latest('published_at',)->paginate(12);
+        if($fromDate=$validated['from_date']??null){
+            $query->where('published_at','>=',new Carbon($fromDate));    
 
+        }
 
-        return view ('blog.index', compact('posts','categories'));
+        if($toDate=$validated['to_date']??null){
+            $query->where('published_at','<=',new Carbon($toDate));    
+
+        }
+
+        if($tag=$validated['tag']??null){
+            $query->whereJsonContains('tags',$tag);    
+
+        }
+
+        $posts=$query->latest('published_at')
+            ->paginate(12);
+
+        return view ('blog.index', compact('posts'));
     }
 
     public function show(Request $request, Post $post)
