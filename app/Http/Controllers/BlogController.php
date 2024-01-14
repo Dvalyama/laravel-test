@@ -3,17 +3,68 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use App\Models\Post;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Carbon;
+
+
+
+
 
 class BlogController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return 'Посты в блоге';
+        $validated=$request->validate([
+            'search'=>['nullable','string','max:50'],
+            'from_date'=>['nullable','string','date'],
+            'to_date'=>['nullable','string','date','after:from_date'],
+            'tag'=>['nullable','string','max:10'],
+        ]);
+
+        $query=Post::query()
+            ->where('published',true)
+            ->whereNotNull('published_at');
+
+        if($search=$validated['search']??null){
+            $query->where('title','like',"%{$search}%");    
+
+        }
+
+        if($fromDate=$validated['from_date']??null){
+            $query->where('published_at','>=',new Carbon($fromDate));    
+
+        }
+
+        if($toDate=$validated['to_date']??null){
+            $query->where('published_at','<=',new Carbon($toDate));    
+
+        }
+
+        if($tag=$validated['tag']??null){
+            $query->whereJsonContains('tags',$tag);    
+
+        }
+
+        $posts=$query->latest('published_at')
+            ->paginate(12);
+
+        return view ('blog.index', compact('posts'));
     }
 
-    public function show($post)
+    public function show(Request $request, Post $post)
     {
-        return 'Один пост в блоге';
+        // $post=cache()->remember(
+        //     key:"posts.{$post}",
+        //     ttl:now()->addHour(),
+        //     callback:function()use($post){
+        //         return $post=Post::query()->findOrFail($post);
+        //     }
+        // ); работа с кешем без вызова Post
+
+        return view ('blog.show',compact('post'));
     }
 
     public function like($post)
