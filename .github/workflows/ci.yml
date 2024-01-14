@@ -26,13 +26,8 @@ jobs:
       run: |
         cp .env.ci .env
         php artisan key:generate
-    - name: PHPUnit
-      run: |
-        ./vendor/bin/phpunit --stop-on-failure --coverage-php=coverage.php
-        env:
-          XDEBUG_MODE: coverage
-      env:
-          XDEBUG_MODE: coverage
+    - name: Run Testsuite
+      run: vendor/bin/phpunit tests/
     - name: PHPStan Analysis
       run: |
         ./vendor/bin/phpstan analyse --configuration=phpstan.neon --memory-limit=256M --error-format=github
