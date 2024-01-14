@@ -1,7 +1,7 @@
 on: push
 name: CI
 jobs:
-  phpunit:
+  test_ci:
     runs-on: ubuntu-latest
     container:
       image: kirschbaumdevelopment/laravel-test-runner:8.0
@@ -29,7 +29,6 @@ jobs:
     - name: Run Testsuite
       run: vendor/bin/phpunit tests/
     - uses: actions/checkout@v3
-    - uses: php-actions/composer@v6 # or alternative dependency management
     - uses: php-actions/phpstan@v3
       with:
         path: src/
