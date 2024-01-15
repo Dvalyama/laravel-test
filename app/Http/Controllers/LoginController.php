@@ -12,12 +12,10 @@ class LoginController extends Controller
     }
     public function store(Request $request)
     {
-        alert(__('Добро пожаловать!'));
-        // if(true){
-        //     return redirect()->back()->withInput();
-        // }
-
+        alert(__('Ласкаво просимо!'));
+       
         return redirect()->route('user');
     }
 
+    
 }
