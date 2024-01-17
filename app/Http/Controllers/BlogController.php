@@ -56,19 +56,15 @@ class BlogController extends Controller
 
     public function show(Request $request, Post $post)
     {
-        // $post=cache()->remember(
-        //     key:"posts.{$post}",
-        //     ttl:now()->addHour(),
-        //     callback:function()use($post){
-        //         return $post=Post::query()->findOrFail($post);
-        //     }
-        // ); работа с кешем без вызова Post
-
-        return view ('blog.show',compact('post'));
+         return view ('blog.show',compact('post'));
     }
 
     public function like($post)
     {
+<<<<<<< HEAD
         return 'Поставити лайк';
+=======
+        return 'Поставити Лайк';
+>>>>>>> ff869899168b227a7dcede0cc6075d96213f8d28
     }
 }

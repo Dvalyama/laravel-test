@@ -29,6 +29,8 @@
                     <li class="nav-item">
                         <span class="nav-link">{{ auth()->user()->name }}</span>
                     </li>
+
+                    {{-- Показувати кнопку вихід тільки для аутентифікованих користувачів --}}
                     <li class="nav-item">
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -47,6 +49,17 @@
                     <li class="nav-item">
                         <a href="{{ route('register') }}" class="nav-link {{ active_link('register') }}" aria-current="page">
                             {{ __('Реєстрація') }}
+
+                    {{-- Показувати кнопки реєстрації та входу для неаутентифікованих користувачів --}}
+                    <li class="nav-item">
+                        <a href="{{ route('register') }}" class="nav-link {{ active_link('register') }}" aria-current="page">
+                            {{ __('Реєстрація') }}
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('login') }}" class="nav-link {{ active_link('login') }}" aria-current="page">
+                            {{ __('Вхід') }}
                         </a>
                     </li>
                 @endauth

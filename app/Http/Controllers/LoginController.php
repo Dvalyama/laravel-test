@@ -14,6 +14,7 @@ class LoginController extends Controller
 
     public function store(Request $request)
     {
+<<<<<<< HEAD
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
@@ -40,4 +41,12 @@ class LoginController extends Controller
 
         return redirect('/');
     }
+=======
+        alert(__('Ласкаво просимо!'));
+       
+        return redirect()->route('user');
+    }
+
+    
+>>>>>>> ff869899168b227a7dcede0cc6075d96213f8d28
 }

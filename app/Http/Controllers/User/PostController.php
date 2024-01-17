@@ -28,26 +28,39 @@ class PostController extends Controller
     }    
 
     public function store(Request $request)
-    {        
-        $validated = validate($request->all(),[
-            'title'=>['required','string','max:100'],
-            'content'=>['required','string','max:1000'],
-            'published_at'=>['nullable','string','date'],
-            'published'=>['nullable','boolean'],
+    {
+        $validator = Validator::make($request->all(), [
+            'title' => ['required', 'string', 'max:100'],
+            'content' => ['required', 'string', 'max:1000'],
+            'published_at' => ['nullable', 'date'],
+            'published' => ['nullable', 'boolean'],
         ]);
 
-        $post = Post::query()->firstOrCreate([
-            'user_id'=>User::query()->value('id'),
-            'title'=>$validated['title'],
-        ],[
-            'content'=>$validated['content'],
-            'published_at'=> new Carbon($validated['published_at'])?? null,
-            'published'=>$validated['published']?? false,
-        ]);
+        if ($validator->fails()) {
+            throw ValidationException::withMessages($validator->errors()->toArray());
+        }
 
+<<<<<<< HEAD
         alert(__('Збережено'));
         return redirect()->route('user.posts.show',123);
     }    
+=======
+        $post = Post::updateOrCreate(
+            [
+                'user_id' => User::value('id'),
+                'title' => $request->title,
+            ],
+            [
+                'content' => $request->content,
+                'published_at' => $request->has('published_at') ? new Carbon($request->published_at) : null,
+                'published' => $request->boolean('published', false),
+            ]
+        );
+
+        Alert::success(__('Збережено'));
+        return redirect()->route('user.posts.show', ['post' => $post->id]);
+    }   
+>>>>>>> ff869899168b227a7dcede0cc6075d96213f8d28
 
     public function show($post)
     {

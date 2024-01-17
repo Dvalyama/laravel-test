@@ -5,12 +5,12 @@
 @section('main.content')
     <x-title>
         {{ __('Мої пости') }}
-
         <x-slot name="right">
             <x-button-link href="{{ route('user.posts.create') }}">
                 {{ __('Створити') }}
             </x-button-link>
         </x-slot>
+        
     </x-title>
 
     @if(empty($posts))

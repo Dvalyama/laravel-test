@@ -25,6 +25,7 @@
                         Загальна сума
                     </div>
 
+
                     <h5 class="m-0">
                         {{ __money($stats->total_amount, $stats->currency_id) }}
                     </h5>

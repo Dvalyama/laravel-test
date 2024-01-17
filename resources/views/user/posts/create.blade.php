@@ -2,6 +2,7 @@
 
 @section('page.title', 'Створити пост')
 
+
 @section('main.content')
     <x-title>
         {{ __('Створити пост') }}
