@@ -10,37 +10,37 @@ class PostController extends Controller
 {
     public function index()
     {
-        return'Страница список постов';
+        return'Сторінка список постів';
     }    
 
     public function create()
     {
-        return'Страница создание постов';
+        return'Сторінка створення постів';
     }    
 
     public function store()
     {
-        return'Запрос создание поста';
+        return'Запит на створення посту';
     }    
 
     public function show()
     {
-        return'Страница просмотра поста';
+        return'Сторінка перегляду посту';
     }    
 
     public function edit()
     {
-        return'Страница изменеия поста';
+        return'Сторінка зміни посту';
     }    
 
     public function update()
     {
-        return'Запрос изменения поста';
+        return'Запит зміни посту';
     }    
 
     public function delete()
     {
-        return'Запрос удаления поста';
+        return'Запит видалення посту';
     }    
 
     public function like()

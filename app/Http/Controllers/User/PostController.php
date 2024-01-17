@@ -45,9 +45,7 @@ class PostController extends Controller
             'published'=>$validated['published']?? false,
         ]);
 
-        dd($post->toArray());
-        
-        alert(__('Сохранено'));
+        alert(__('Збережено'));
         return redirect()->route('user.posts.show',123);
     }    
 
@@ -83,7 +81,7 @@ class PostController extends Controller
         
         dd($validated);
         
-        alert(__('Сохранено'));
+        alert(__('Збережено'));
 
         return redirect()->back();
     }    

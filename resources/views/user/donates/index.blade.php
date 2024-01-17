@@ -1,10 +1,10 @@
 @extends('layouts.main')
 
-@section('page.title', 'Мои донаты')
+@section('page.title', 'Мої донаты')
 
 @section('main.content')
     <x-title>
-        {{ __('Мои донаты') }}
+        {{ __('Мої донаты') }}
     </x-title>
 
     @include('user.donates.stats')

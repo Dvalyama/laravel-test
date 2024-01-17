@@ -45,7 +45,7 @@ class ValidationController extends Controller
             'delivery.time' => ['required', 'string', 'date_format:H:i:s'], // 21:30:00
             'secret' => ['required', 'string', function ($attribute, $value, \Closure $fail) {
                 if ($value !== config('example.secret')) {
-                    $fail(__('Неверный секретный ключ.'));
+                    $fail(__('Невірний секретний ключ.'));
                 }
             }],
         ]);

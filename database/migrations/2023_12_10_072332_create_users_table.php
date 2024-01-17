@@ -23,10 +23,10 @@ return new class extends Migration
             $table->string('avatar')->nullable();
             $table->boolean('active')->default(true);
             
-            $table->string('passwors');
+            $table->string('password');
             $table->rememberToken();
 
-
+            $table->timestamp('email_verified_at')->nullable();
         });
     }
 

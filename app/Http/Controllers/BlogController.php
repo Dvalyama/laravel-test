@@ -69,6 +69,6 @@ class BlogController extends Controller
 
     public function like($post)
     {
-        return 'Поставить лайк';
+        return 'Поставити лайк';
     }
 }

@@ -1,10 +1,10 @@
 @extends('layouts.main')
 
-@section('page.title', 'Создать пост')
+@section('page.title', 'Створити пост')
 
 @section('main.content')
     <x-title>
-        {{ __('Создать пост') }}
+        {{ __('Створити пост') }}
 
         <x-slot name="link">
             <a href="{{ route('user.posts') }}">
@@ -15,7 +15,7 @@
 
     <x-post.form action="{{ route('user.posts.store') }}" method="post">
         <x-button type="submit">
-            {{ __('Создать пост') }}
+            {{ __('Створити пост') }}
         </x-button>
     </x-post.form>
 @endsection

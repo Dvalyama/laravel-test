@@ -1,10 +1,10 @@
 @extends('layouts.main')
 
-@section('page.title','Просмотр')
+@section('page.title','Перегляд')
 
 @section('main.content')
     <x-title>
-        {{__('Просмотр поста')}} 
+        {{__('Перегляд поста')}} 
         
         <x-slot name="link">
             <a href="{{route('user.posts')}}">
@@ -14,7 +14,7 @@
 
         <x-slot name="right">
             <x-button-link href="{{route('user.posts.edit',$post->id)}}">
-                {{__('Редактировать')}}
+                {{__('Редагувати')}}
             </x-button-link>
         </x-slot>
     </x-title>

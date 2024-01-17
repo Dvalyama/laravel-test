@@ -5,12 +5,12 @@ use App\Http\Controllers\TestController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\Posts\CommentController;
+use Illuminate\Support\Facades\Auth;
 
 Route::view('/', 'home.index')->name('home');
 
 Route::redirect('/home', '/')->name('home.redirect');
 
-// Route::get('/test', TestController::class)->name('test')->middleware('token:secret');
 Route::get('/test', TestController::class)->name('test');
 
 Route::middleware('guest')->group(function () {
@@ -29,6 +29,7 @@ Route::resource('posts/{post}/comments', CommentController::class)->only([
     'index', 'show',
 ]);
 
-// Route::fallback(function () {
-//     return 'Fallback';
-// });
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('/');
+})->name('logout');

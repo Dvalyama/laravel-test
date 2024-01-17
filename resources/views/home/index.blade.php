@@ -3,7 +3,7 @@
 @section('main.content')
     <div class="text-center">
         <h1>
-            Главная страница
+            Головна сторінка
         </h1> 
     </div>
 @endsection

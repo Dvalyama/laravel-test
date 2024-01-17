@@ -1,12 +1,12 @@
 <x-card>
     <x-card-header>
         <x-card-title>
-            {{__('Вход')}}
+            {{__('Вхід')}}
         </x-card-title>
 
         <x-slot name="right">
             <a href="{{route('register')}}">
-                {{_('Регистрация')}}
+                {{_('Реєстрація')}}
             </a>
         </x-slot>
     </x-card-header>
@@ -26,12 +26,12 @@
 
             <x-form-item>
                 <x-checkbox name="remember">
-                    {{__('Запомнить меня')}}
+                    {{__("Запам'ятати мене")}}
                 </x-checkbox>
             </x-form-item>
 
             <x-button type="submit" size="sm">
-                {{__('Войти')}}
+                {{__('Війти')}}
             </x-button>         
         </x-form>        
     </x-card-body>
