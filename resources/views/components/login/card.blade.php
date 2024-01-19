@@ -31,11 +31,7 @@
             </x-form-item>
 
             <x-button type="submit" size="sm">
-<<<<<<< HEAD
-                {{__('Війти')}}
-=======
                 {{__('Увійти')}}
->>>>>>> ff869899168b227a7dcede0cc6075d96213f8d28
             </x-button>         
         </x-form>        
     </x-card-body>
