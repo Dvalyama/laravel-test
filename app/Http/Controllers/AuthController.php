@@ -14,24 +14,29 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            return redirect()->route('user.posts');
+            return redirect()->intended(route('user.posts'));
         }
 
         return back()->withErrors(['email' => 'Невірна адреса електронної пошти або пароль'])->withInput();
     }
 
+    public function showRegistrationForm()
+    {
+        return view('register.index');
+    }
+
     public function register(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => bcrypt($validated['password']),
         ]);
 
         Auth::login($user);

@@ -33,3 +33,4 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? 'https') === 'https',
 //     enabledTransports: ['ws', 'wss'],
 // });
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wkESZLMrbFBGB5/woV2e+VDPAp72t5PfR2FqXbCr2mAEau3tV6UqzRFe9qWbR2Fw" crossorigin="anonymous">
