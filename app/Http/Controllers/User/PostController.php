@@ -12,7 +12,9 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::query()
+        $user = Auth::user();
+
+        $posts = $user->posts()
             ->latest('created_at')
             ->paginate(12);
 
@@ -30,6 +32,7 @@ class PostController extends Controller
 
         $post = (new Post)->fillAttributes($validated);
         $post->user_id = Auth::id();
+        $post->published_at = now();
         $post->save();
 
         alert(__('Збережено!'));

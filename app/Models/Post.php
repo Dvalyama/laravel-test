@@ -5,6 +5,8 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 
 /**
  * @property string $title
@@ -46,8 +48,13 @@ class Post extends Model
         return $this->fill([
             'title' => $attributes['title'],
             'content' => $attributes['content'],
-            'published_at' => new Carbon($attributes['published_at']) ?? null,
+            'published_at' => optional(new Carbon($attributes['published_at']))->isValid() ? new Carbon($attributes['published_at']) : null,
             'published' => $attributes['published'] ?? false,
         ]);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }
