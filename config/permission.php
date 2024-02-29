@@ -69,6 +69,10 @@ return [
          */
 
         'role_has_permissions' => 'role_has_permissions',
+
+        'role_user' => 'role_user',
+
+        'users' => 'users',
     ],
 
     'column_names' => [
@@ -183,4 +187,5 @@ return [
 
         'store' => 'default',
     ],
+
 ];

@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 
@@ -15,6 +17,7 @@ class RoleSeeder extends Seeder
         $adminRole = Role::create(['name' => 'admin']);
         $userRole = Role::create(['name' => 'user']);
 
-        $adminRole->givePermissionTo('all');
+        $this->call([PermissionsSeeder::class]);
+
     }
 }

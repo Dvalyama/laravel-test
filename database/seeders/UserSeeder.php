@@ -10,12 +10,17 @@ class UserSeeder extends Seeder
 {
     public function run()
     {
-        DB::table('users')->truncate();
+        $this->call([RoleSeeder::class]);
 
-        DB::table('users')->insert([
+        $user = DB::table('users')->insert([
             'name' => 'Test User',
             'email' => 'test@example.com',
             'password' => Hash::make('password'),
+        ]);
+
+        $user = DB::table('role_user')->insert([
+            'user_id' => 1,
+            'role_id' => 1,
         ]);
     }
 }
