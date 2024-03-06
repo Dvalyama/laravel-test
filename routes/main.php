@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\User\PostController;
 use App\Http\Controllers\Posts\CommentController;
+use App\Http\Middleware\CheckRolePermission;
 
 Route::view('/', 'home.index')->name('home');
 Route::redirect('/home', '/')->name('home.redirect');
@@ -31,4 +32,12 @@ Route::middleware('auth')->group(function () {
     Route::get('user/posts', [PostController::class, 'index'])->name('user.posts.index');
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 });
+
+Route::middleware(['check.role.permission:admin,create-post', 'auth'])->group(function () {
+    Route::get('user/posts/create', [PostController::class, 'create'])->name('user.posts.create');
+});
+
+Route::get('/access-denied', function () {
+    return view('errors.access_denied');    
+})->name('access.denied');
 

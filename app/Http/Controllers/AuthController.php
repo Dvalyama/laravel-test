@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
@@ -38,7 +37,7 @@ class AuthController extends Controller
             'email' => $validated['email'],
             'password' => bcrypt($validated['password']),
         ]);
-        $user->assignRole('user');
+        $user->assignRole('viewer');
 
         Auth::login($user);
 

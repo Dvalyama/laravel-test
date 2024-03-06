@@ -15,12 +15,14 @@ class PermissionsSeeder extends Seeder
      */
     public function run()
     {
-        Permissions::create(['name' => 'view']);
-        Permissions::create(['name' => 'create']);
-        Permissions::create(['name' => 'edit any']);
-        Permissions::create(['name' => 'edit own']);
-        Permissions::create(['name' => 'delete any']);
-        Permissions::create(['name' => 'delete own']);
+        Permissions::create(['name' => 'view post']);
+        Permissions::create(['name' => 'view comments']);
+        Permissions::create(['name' => 'publish comments']);
+        Permissions::create(['name' => 'create posts']);
+        Permissions::create(['name' => 'edit any posts']);
+        Permissions::create(['name' => 'edit own posts']);
+        Permissions::create(['name' => 'delete any posts']);
+        Permissions::create(['name' => 'delete own posts']);
 
 
 
