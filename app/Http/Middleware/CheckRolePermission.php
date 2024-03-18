@@ -1,6 +1,4 @@
 <?php
-<?php
-
 namespace App\Http\Middleware;
 
 use Closure;
@@ -9,12 +7,14 @@ use Illuminate\Support\Facades\Auth;
 
 class CheckRolePermission
 {
-    public function handle(Request $request, Closure $next, ...$rolesAndPermissions)
+    public function handle(Request $request, Closure $next, $rolesAndPermissions)
     {
         $user = $request->user();
 
+        $rolesAndPermissions = is_array($rolesAndPermissions) ? $rolesAndPermissions : explode(',', $rolesAndPermissions);
+
         foreach ($rolesAndPermissions as $roleOrPermission) {
-            if ($user && ($user->hasRole($roleOrPermission) || $user->hasPermissionTo($roleOrPermission))) {
+            if ($user->hasPermissionTo($roleOrPermission)) {
                 return $next($request);
             }
         }

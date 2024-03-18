@@ -23,17 +23,17 @@ class RoleSeeder extends Seeder
 
         $adminRole->permissions()->sync(Permission::pluck('id')->toArray());
 
-        $editorRole->permissions()->sync(Permission::whereIn('name', [
+        $editorRole->givePermissionTo([
             'view post',
             'view comments',
             'create posts',
             'edit own posts',
             'delete own posts',
-        ])->pluck('id')->toArray());
+        ]);
 
-        $viewerRole->permissions()->sync(Permission::whereIn('name', [
+        $viewerRole->givePermissionTo([
             'view post',
             'view comments',
-        ])->pluck('id')->toArray());
+        ]);
     }
 }

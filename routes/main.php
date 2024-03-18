@@ -33,9 +33,6 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 });
 
-Route::middleware(['check.role.permission:admin,create-post', 'auth'])->group(function () {
-    Route::get('user/posts/create', [PostController::class, 'create'])->name('user.posts.create');
-});
 
 Route::get('/access-denied', function () {
     return view('errors.access_denied');    

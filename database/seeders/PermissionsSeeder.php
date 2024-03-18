@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Permissions;
+use Spatie\Permission\Models\Permission;
 
 class PermissionsSeeder extends Seeder
 {
@@ -15,14 +14,14 @@ class PermissionsSeeder extends Seeder
      */
     public function run()
     {
-        Permissions::create(['name' => 'view post']);
-        Permissions::create(['name' => 'view comments']);
-        Permissions::create(['name' => 'publish comments']);
-        Permissions::create(['name' => 'create posts']);
-        Permissions::create(['name' => 'edit any posts']);
-        Permissions::create(['name' => 'edit own posts']);
-        Permissions::create(['name' => 'delete any posts']);
-        Permissions::create(['name' => 'delete own posts']);
+        Permission::create(['name' => 'view post']);
+        Permission::create(['name' => 'view comments']);
+        Permission::create(['name' => 'publish comments']);
+        Permission::create(['name' => 'create posts']);
+        Permission::create(['name' => 'edit any posts']);
+        Permission::create(['name' => 'edit own posts']);
+        Permission::create(['name' => 'delete any posts']);
+        Permission::create(['name' => 'delete own posts']);
 
 
 

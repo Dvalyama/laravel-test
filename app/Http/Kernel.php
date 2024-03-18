@@ -69,6 +69,7 @@ class Kernel extends HttpKernel
         'active' => \App\Http\Middleware\ActiveMiddleware::class,
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
         'token' => \App\Http\Middleware\TokenMiddleware::class,
+        'permission' => \App\Http\Middleware\CheckRolePermission::class,
 
     ];
 }

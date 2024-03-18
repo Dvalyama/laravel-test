@@ -21,9 +21,9 @@ class PostController extends Controller
         return view('user.posts.index', compact('posts'));
     }
 
-    public function create()
+     public function create()
     {
-        $this->authorize('create', Post::class);
+        // $this->authorize('create', Post::class);
 
         return view('user.posts.create');
     }
