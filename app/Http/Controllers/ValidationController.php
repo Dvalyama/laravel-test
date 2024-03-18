@@ -23,13 +23,10 @@ class ValidationController extends Controller
             'zip' => ['required', 'digits:6'], // 49000 индекц почты
             'subscription' => ['nullable', 'boolean'], // true/false/1/0 подписка раасылки на почту
             'agreement' => ['accepted'], // true/1/yes соглашение пользователя
-            'password' => ['required', 'string', 'min:7', 'confirmed'], // password_confirmation
-            'password' => ['required', 'string', Password::min(8)->letters()->mixedCase()->numbers()->symbols(), 'confirmed'], // Secret123!
+            'password' => ['required', 'string', Password::min()->letters()->mixedCase()->numbers()->symbols(), 'confirmed'], // Secret123!
             'current_password' => ['required', 'string', 'current_password'], // текущий пароль
             'email' => ['required', 'string', 'max:100', 'email', 'exists:users'], // mail@example.com
-            'country_id' => ['required', 'integer', 'exists:coutries,id'],
             'country_id' => ['required', 'integer', Rule::exists('countries', 'id')->where('active', true)],
-            'phone' => ['required', 'string', 'unique:users,phone'],
             'phone' => ['required', 'string', new Phone, Rule::unique('users', 'phone')->ignore($user)],
             'website' => ['nullable', 'string', 'url'], // https://example.com
             'uuid' => ['nullable', 'string', 'uuid'], // уникальний айди

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Posts;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Comment;
+use Illuminate\Http\Response;
 
 class CommentController extends Controller
 {
@@ -19,7 +20,7 @@ class CommentController extends Controller
         $comments = Comment::all();
 
         // Повертаємо вид зі списком коментарів і передаємо в нього змінну з коментарями
-        return view('comments.index', compact('comments'));
+        return response()->view('comments.index', compact('comments'));
     }
 
     /**
@@ -30,7 +31,7 @@ class CommentController extends Controller
     public function create()
     {
         // Повертаємо вид з формою для створення коментаря
-        return view('comments.create');
+        return response()->view('comments.create');
     }
 
     /**
