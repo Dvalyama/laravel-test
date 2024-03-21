@@ -30,7 +30,7 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        $this->authorize('create', Post::class);
+//        $this->authorize('create', Post::class);
 
         $validated = validate($request->all(), Post::$rules);
 
@@ -51,14 +51,14 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
-        $this->authorize('update', $post);
+//        $this->authorize('update', $post);
 
         return view('user.posts.edit', compact('post'));
     }
 
     public function update(Request $request, Post $post)
     {
-        $this->authorize('update', $post);
+//        $this->authorize('update', $post);
 
         $validated = validate($request->all(), Post::$rules);
 
@@ -71,8 +71,8 @@ class PostController extends Controller
 
     public function delete($post)
     {
-        $this->authorize('delete', $post);
-        
+/*        $this->authorize('delete', $post);*/
+
         $post->delete();
 
         return redirect()->route('user.posts');
