@@ -26,7 +26,7 @@ class ValidationController extends Controller
             'password' => ['required', 'string', Password::min(8)->letters()->mixedCase()->numbers()->symbols(), 'confirmed'], // Secret123!
             'current_password' => ['required', 'string', 'current_password'], // текущий пароль
             'email' => ['required', 'string', 'max:100', 'email', 'exists:users'], // mail@example.com
-            'country_id' => ['required', 'integer', Rule::exists('countries', 'id')->where('active', true)],
+            'country_id' => ['required', 'integer', Rule::exists('countries', 'id')->where('active')],
             'phone' => ['required', 'string', new Phone, Rule::unique('users', 'phone')->ignore($user)],
             'website' => ['nullable', 'string', 'url'], // https://example.com
             'uuid' => ['nullable', 'string', 'uuid'], // уникальний айди
