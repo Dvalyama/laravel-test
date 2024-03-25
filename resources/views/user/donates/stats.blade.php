@@ -8,7 +8,7 @@
             <x-card>
                 <x-card-body>
                     <div class="mb-2 text-muted small">
-                        Кол-во донатов
+                        Кількість донатів
                     </div>
 
                     <h5 class="m-0">
@@ -22,8 +22,9 @@
             <x-card>
                 <x-card-body>
                     <div class="mb-2 text-muted small">
-                        Общая сумма
+                        Загальна сума
                     </div>
+
 
                     <h5 class="m-0">
                         {{ __money($stats->total_amount, $stats->currency_id) }}
@@ -36,7 +37,7 @@
             <x-card>
                 <x-card-body>
                     <div class="mb-2 text-muted small">
-                        Средняя сумма
+                        Середня сума
                     </div>
 
                     <h5 class="m-0">
@@ -50,7 +51,7 @@
             <x-card>
                 <x-card-body>
                     <div class="mb-2 text-muted small">
-                        Мин. сумма
+                        Мінімальна сума
                     </div>
 
                     <h5 class="m-0">
@@ -64,7 +65,7 @@
             <x-card>
                 <x-card-body>
                     <div class="mb-2 text-muted small">
-                        Макс. сумма
+                        Максимальна сума
                     </div>
 
                     <h5 class="m-0">

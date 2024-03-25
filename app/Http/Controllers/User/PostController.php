@@ -2,99 +2,79 @@
 
 namespace App\Http\Controllers\User;
 
-use Carbon\Carbon;
 use App\Models\Post;
 use App\Models\User;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\StorePostRequest;
-use Illuminate\Validation\ValidationException;
-
-
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
     public function index()
     {
-        $posts=Post::query()->paginate(12);
+        $user = Auth::user();
 
-        return view('user.posts.index',compact('posts'));
-    }    
+        $posts = $user->posts()
+            ->latest('created_at')
+            ->paginate(12);
 
-    public function create()
+        return view('user.posts.index', compact('posts'));
+    }
+
+     public function create()
     {
+        // $this->authorize('create', Post::class);
+
         return view('user.posts.create');
-    }    
+    }
 
     public function store(Request $request)
-    {        
-        $validated = validate($request->all(),[
-            'title'=>['required','string','max:100'],
-            'content'=>['required','string','max:1000'],
-            'published_at'=>['nullable','string','date'],
-            'published'=>['nullable','boolean'],
-        ]);
-
-        $post = Post::query()->firstOrCreate([
-            'user_id'=>User::query()->value('id'),
-            'title'=>$validated['title'],
-        ],[
-            'content'=>$validated['content'],
-            'published_at'=> new Carbon($validated['published_at'])?? null,
-            'published'=>$validated['published']?? false,
-        ]);
-
-        dd($post->toArray());
-        
-        alert(__('Сохранено'));
-        return redirect()->route('user.posts.show',123);
-    }    
-
-    public function show($post)
     {
-        $post= (object) [
-            'id'=>123,
-            'title'=>'Lorem ipsum dolor sit amet.',
-            'content'=>'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est, corporis.',
-        ];
+//        $this->authorize('create', Post::class);
 
-        return view('user.posts.show',compact('post'));
-    }    
+        $validated = validate($request->all(), Post::$rules);
 
-    public function edit($post)
+        $post = (new Post)->fillAttributes($validated);
+        $post->user_id = Auth::id();
+        $post->published_at = now();
+        $post->save();
+
+        alert(__('Збережено!'));
+
+        return redirect()->route('user.posts.show', $post);
+    }
+
+    public function show(Post $post)
     {
-        $post= (object) [
-            'id'=>123,
-            'title'=>'Lorem ipsum dolor sit amet.',
-            'content'=>'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est, corporis.',
-        ];
+        return view('user.posts.show', compact('post'));
+    }
 
-        return view('user.posts.edit',compact('post'));
-    }    
-
-    public function update(Request $request,$post)
+    public function edit(Post $post)
     {
-        $validated = validate($request->all(),[
-            'title'=>['required','string','max:100'],
-            'content'=>['required','string','max:1000'],
+//        $this->authorize('update', $post);
 
-        ]);
-        
-        dd($validated);
-        
-        alert(__('Сохранено'));
+        return view('user.posts.edit', compact('post'));
+    }
 
-        return redirect()->back();
-    }    
+    public function update(Request $request, Post $post)
+    {
+//        $this->authorize('update', $post);
+
+        $validated = validate($request->all(), Post::$rules);
+
+        $post->fillAttributes($validated)->save();
+
+        alert(__('Збережено!'));
+
+        return back();
+    }
 
     public function delete($post)
     {
-        return redirect()->route('user.posts.');
-    }    
+/*        $this->authorize('delete', $post);*/
 
-    public function like()
-    {
-        return'Лайк + 1';
-    }    
+        $post->delete();
+
+        return redirect()->route('user.posts');
+    }
 }

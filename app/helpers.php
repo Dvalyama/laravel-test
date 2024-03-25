@@ -29,10 +29,9 @@ if (!function_exists('validate')) {
 }
 
 if (!function_exists('__money')) {
-    function __money(string $amount, string $currency_id):string
+    function __money(float $amount, string $currency_id): string
     {
-        $value = number_format($amount,2,'.','');
-
+        $value = number_format($amount, 2, '.', '');
         return "{$value} {$currency_id}";
     }
 }

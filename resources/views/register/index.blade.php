@@ -1,17 +1,17 @@
 @extends('layouts.auth')
 
-@section('page.title', 'Регистрация')
+@section('page.title', 'Реєстрація')
 
 @section('auth.content')
     <x-card>
         <x-card-header>
             <x-card-title>
-                {{ __('Регистрация') }}
+                {{ __('Реєстрація') }}
             </x-card-title>
 
             <x-slot name="right">
                 <a href="{{ route('login') }}">
-                    {{ __('Вход') }}
+                    {{ __('Вхід') }}
                 </a>
             </x-slot>
         </x-card-header>
@@ -21,7 +21,7 @@
 
             <x-form action="{{ route('register.store') }}" method="POST">
                 <x-form-item>
-                    <x-label required>{{ __('Имя') }}</x-label>
+                    <x-label required>{{ __("Ім'я") }}</x-label>
                     <x-input name="name" autofocus/>
                 </x-form-item>
 
@@ -36,18 +36,18 @@
                 </x-form-item>
 
                 <x-form-item>
-                    <x-label required>{{ __('Пароль еще раз') }}</x-label>
+                    <x-label required>{{ __('Пароль ще раз') }}</x-label>
                     <x-input type="password" name="password_confirmation" />
                 </x-form-item>
 
                 <x-form-item>
                     <x-checkbox name="agreement" :checked="!! request()->old('agreement')">
-                        {{ __('Я согласен на обработку пользовательский данных') }}
+                        {{ __('Я згоден на обробку даних користувача') }}
                     </x-checkbox>
                 </x-form-item>
 
                 <x-button type="submit">
-                    {{ __('Войти') }}
+                    {{ __('Війти') }}
                 </x-button>
             </x-form>
         </x-card-body>

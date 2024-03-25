@@ -1,10 +1,10 @@
 @extends('layouts.main')
 
-@section('page.title','Изменить пост')
+@section('page.title','Змінити пост')
 
 @section('main.content')
     <x-title>
-        {{__('Изменить пост')}}
+        {{__('Змінити пост')}}
 
         <x-slot name="link">
             <a href="{{route('user.posts.show', $post->id)}}">
@@ -15,7 +15,7 @@
 
     <x-post.form action="{{route('user.posts.update', $post->id)}}" method="put" :post="$post">
         <x-button type="submit">
-            {{__('Сохранить')}}
+            {{__('Зберегти')}}
         </x-button>
     </x-post.form>
 

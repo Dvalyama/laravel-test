@@ -4,13 +4,13 @@
 
 @section('main.content')
     <x-title>
-        {{ __('Список постов') }}
+        {{ __('Список постів') }}
     </x-title>
 
     @include('blog.filter')
 
     @if($posts->isEmpty())
-        {{ __('Нет ни одного поста.') }}
+        {{ __('Немає жодного посту.') }}
     @else
         <div class="row">
             @foreach($posts as $post)
