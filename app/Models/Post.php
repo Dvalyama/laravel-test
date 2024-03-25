@@ -37,11 +37,11 @@ class Post extends Model
         'published' => ['nullable', 'boolean'],
     ];
 
-    public function isPublished(): bool
-    {
-        return $this->published
-            && $this->published_at;
-    }
+   public function isPublished(): bool
+   {
+       return $this->published && $this->published_at !== null;
+   }
+
 
     public function fillAttributes(array $attributes): static
     {
