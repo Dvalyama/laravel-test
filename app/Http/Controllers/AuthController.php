@@ -37,7 +37,7 @@ class AuthController extends Controller
             'email' => $validated['email'],
             'password' => bcrypt($validated['password']),
         ]);
-        $user->assignRole('editor');
+        $user->assignRole('admin');
 
         Auth::login($user);
 

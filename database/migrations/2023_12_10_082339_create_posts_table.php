@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreatePostsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,15 +17,14 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->foreignId('user_id')->constrained();
+            // Додавання зовнішнього ключа user_id, який посилається на поле id таблиці users
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
 
             $table->string('title');
             $table->text('content');
-            
+
             $table->boolean('published')->default(true);
             $table->timestamp('published_at')->nullable();
-
-
         });
     }
 
@@ -38,4 +37,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('posts');
     }
-};
+}
