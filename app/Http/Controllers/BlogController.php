@@ -57,10 +57,13 @@ class BlogController extends Controller
 
     public function show(Request $request, Post $post)
     {
-        $comments = Comment::with('comments')->get();
-
+        $comments = Comment::where('post_id', $post->id)
+                            ->whereNull('parent_id')
+                            ->get();
+    
         return view('blog.show', compact('post', 'comments'));
     }
+    
 
     public function like($post)
     {

@@ -24,7 +24,9 @@ Route::prefix('user')->group(function () {
         Route::delete('posts/{post}', [PostController::class, 'delete'])->name('user.posts.delete');
     });
 
-    Route::delete('comment/{id}', [CommentController::class, 'destroy'])->name('user.comment.destroy');
+    Route::delete('/user/comments/{id}', [CommentController::class, 'destroy'])->name('user.comment.delete');
+
+    Route::get('/posts/{post_id}/comments', [CommentController::class, 'showCommentsForPost'])->name('post.comments');
 
     Route::get('donates', DonateController::class)->name('user.donates');
 });

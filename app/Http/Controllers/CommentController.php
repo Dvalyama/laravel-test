@@ -3,57 +3,61 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
-use App\Models\Post;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Facades\Redirect;
 
 class CommentController extends Controller
 {
-
-
     /**
-     * Обработка формы - AJAX
+     * Store a newly created comment in storage.
      *
-     * @param Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
-
-        $data = $request->except('_token', 'comment_post_ID', 'comment_parent');
-
-        $data['post_id'] = $request->input('comment_post_ID');
-
-        $data['user_id'] = Auth::id();
-
-
-        $validator = Validator::make($data,[
-            'post_id' => 'integer|required',
+        $data = $request->validate([
             'text' => 'required',
-            'user_id' => 'integer|required',
-
+            'post_id' => 'required|exists:posts,id',
         ]);
-
-        unset($data['submit']);
-
-        $comment = new Comment($data);
-        $comment->save();
-
-
-        if ($validator->fails()) {
-            return response()->json(['error'=>$validator->errors()->all()]);
+    
+        $data['user_id'] = auth()->id();
+    
+        $comment = Comment::create($data);
+    
+        if ($comment) {
+            return Redirect::back()->with('success', 'Коментар успішно додано');
         }
-
-
-        $data['id'] = $comment->id;
-//        $data['hash'] = md5($user->email);
-
-
-        $view_comment = view(env('THEME').'.comments.new_comment')->with('data', $data)->render();
-
-        return response()->json(['success'=>true, 'comment'=>$view_comment, 'data'=>$data]);
-
+    
+        return Redirect::back()->with('error', 'Помилка при додаванні коментаря');
     }
+
+    /**
+     * Remove the specified comment from storage and redirect back.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy($id): RedirectResponse
+    {
+        $comment = Comment::find($id);
+        if ($comment) {
+            $comment->delete();
+            return redirect()->back()->with('success', 'Коментар успішно видалено');
+        }
+        return redirect()->back()->with('error', 'Помилка при видаленні коментаря');
+    }
+
+        public function showCommentsForPost($post_id)
+    {
+        // Отримуємо коментарі до конкретного поста
+        $comments = Comment::where('post_id', $post_id)->get();
+
+        // Повертаємо вид з коментарями для поста
+        return view('post.comments', compact('comments', 'post_id'));
+    }
+
+    
 }

@@ -8,7 +8,7 @@
         <div class="comment-meta commentmetadata">
             <div class="intro">
                 <div class="commentDate">
-                    только что добавлен
+                    Тільки що додано
                 </div>
             </div>
             <div class="comment-body">
