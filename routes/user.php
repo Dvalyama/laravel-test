@@ -11,7 +11,11 @@ Route::prefix('user')->group(function () {
     Route::group(['middleware' => ['permission:create posts']], function () {
         Route::get('posts', [PostController::class, 'create'])->name('user.posts.create');
         Route::get('posts/create', [PostController::class, 'index'])->name('user.posts');
-        Route::post('comment/create', [CommentController::class, 'store'])->name('user.comment');
+    });
+
+    Route::group(['middleware' => ['permission:publish comments']], function () {
+        Route::post('comment/create', [CommentController::class, 'store'])->name('user.comment.create');
+        Route::post('publish-comment', [CommentController::class, 'publish'])->name('comment.publish');
     });
 
     Route::post('posts', [PostController::class, 'store'])->name('user.posts.store');
@@ -24,10 +28,12 @@ Route::prefix('user')->group(function () {
         Route::delete('posts/{post}', [PostController::class, 'delete'])->name('user.posts.delete');
     });
 
-    Route::delete('/user/comments/{id}', [CommentController::class, 'destroy'])->name('user.comment.delete');
+    Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->name('user.comment.delete');
+
+    // Додано маршрут для додавання коментарів з іменем user.comment
+    Route::post('comment', [CommentController::class, 'store'])->name('user.comment');
 
     Route::get('/posts/{post_id}/comments', [CommentController::class, 'showCommentsForPost'])->name('post.comments');
 
     Route::get('donates', DonateController::class)->name('user.donates');
 });
-

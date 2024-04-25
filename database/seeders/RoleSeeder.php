@@ -26,6 +26,7 @@ class RoleSeeder extends Seeder
         $editorRole->givePermissionTo([
             'view post',
             'view comments',
+            'publish comments',
             'create posts',
             'edit own posts',
             'delete own posts',

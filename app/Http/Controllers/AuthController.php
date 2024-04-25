@@ -13,7 +13,7 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            return redirect()->intended(route('user.posts'));
+            return redirect('/');
         }
 
         return back()->withErrors(['email' => 'Невірна адреса електронної пошти або пароль'])->withInput();
@@ -41,7 +41,7 @@ class AuthController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('user.posts');
+        return redirect('/');
     }
 
     public function logout(Request $request)
