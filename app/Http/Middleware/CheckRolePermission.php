@@ -21,7 +21,7 @@ class CheckRolePermission
                 return $next($request);
             }
         }
-$a=1;
+        
         return redirect()->route('access.denied');
     }
 }
