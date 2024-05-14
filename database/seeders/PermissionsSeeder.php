@@ -22,6 +22,8 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'edit own posts']);
         Permission::create(['name' => 'delete any posts']);
         Permission::create(['name' => 'delete own posts']);
+        Permission::create(['name' => 'access admin panel']);
+
 
 
 

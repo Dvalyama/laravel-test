@@ -12,7 +12,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-md-0">
                 <li class="nav-item">
                     <a href="{{ route('home') }}" class="nav-link {{ active_link('home') }}" aria-current="page">
-                        {{ __('Головна') }}
+                        {{ __('quarded') }}
                     </a>
                 </li>
 
@@ -25,7 +25,7 @@
 
             <ul class="navbar-nav ms-auto mb-2 mb-md-0">
                 @auth
-                    @if(auth()->user()->isAdmin())
+                    @if(auth()->user()->in())
                         <li class="nav-item">
                             <a href="{{ route('admin.dashboard') }}" class="nav-link">
                                 {{ __('Адмін панель') }}

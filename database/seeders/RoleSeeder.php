@@ -27,6 +27,7 @@ class RoleSeeder extends Seeder
             'view post',
             'view comments',
             'publish comments',
+            'delete comments',
             'create posts',
             'edit own posts',
             'delete own posts',

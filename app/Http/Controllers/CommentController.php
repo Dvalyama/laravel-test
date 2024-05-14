@@ -18,20 +18,18 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'text' => 'required',
+        $validatedData = $request->validate([
+            'text' => 'required|string',
             'post_id' => 'required|exists:posts,id',
         ]);
-    
-        $data['user_id'] = auth()->id();
-    
-        $comment = Comment::create($data);
-    
-        if ($comment) {
-            return Redirect::back()->with('success', 'Коментар успішно додано');
-        }
-    
-        return Redirect::back()->with('error', 'Помилка при додаванні коментаря');
+
+        $comment = new Comment();
+        $comment->text = $validatedData['text'];
+        $comment->post_id = $validatedData['post_id'];
+        $comment->user_id = auth()->user()->id;
+        $comment->save();
+
+        return response()->json(['message' => 'Коментар успішно додано'], 201);
     }
 
     /**
@@ -43,19 +41,18 @@ class CommentController extends Controller
     public function destroy($id): RedirectResponse
     {
         $comment = Comment::find($id);
+        
         if ($comment) {
             $comment->delete();
-            return redirect()->back()->with('success', 'Коментар успішно видалено');
+            return Redirect::back()->with('success', 'Коментар успішно видалено');
+        } else {
+            return Redirect::back()->with('error', 'Помилка при видаленні коментаря');
         }
-        return redirect()->back()->with('error', 'Помилка при видаленні коментаря');
     }
-
-        public function showCommentsForPost($post_id)
+    public function showCommentsForPost($post_id)
     {
-        // Отримуємо коментарі до конкретного поста
         $comments = Comment::where('post_id', $post_id)->get();
 
-        // Повертаємо вид з коментарями для поста
         return view('post.comments', compact('comments', 'post_id'));
     }
 

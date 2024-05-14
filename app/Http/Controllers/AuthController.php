@@ -14,9 +14,8 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             return redirect('/');
-        }
-
-        return back()->withErrors(['email' => 'Невірна адреса електронної пошти або пароль'])->withInput();
+        } else {
+            return back()->withErrors(['email' => 'Невірна адреса електронної пошти або пароль'])->withInput();}
     }
 
     public function showRegistrationForm()
@@ -37,7 +36,7 @@ class AuthController extends Controller
             'email' => $validated['email'],
             'password' => bcrypt($validated['password']),
         ]);
-        $user->assignRole('viewer');
+        $user->assignRole('editor');
 
         Auth::login($user);
 
