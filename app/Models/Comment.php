@@ -15,8 +15,8 @@ class Comment extends Model
     /**
      * @var array
      */
-    protected $guarded = [];
-
+    protected $fillable = ['title', 'content'];
+    
     /**
      * Связь с моделью Post
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
