@@ -17,6 +17,7 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'view post']);
         Permission::create(['name' => 'view comments']);
         Permission::create(['name' => 'publish comments']);
+        Permission::create(['name' => 'delete comments']);
         Permission::create(['name' => 'create posts']);
         Permission::create(['name' => 'edit any posts']);
         Permission::create(['name' => 'edit own posts']);
