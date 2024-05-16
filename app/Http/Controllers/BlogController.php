@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
@@ -29,22 +30,22 @@ class BlogController extends Controller
             ->whereNotNull('published_at');
 
         if($search=$validated['search']??null){
-            $query->where('title','like',"%{$search}%");    
+            $query->where('title','like',"%{$search}%");
 
         }
 
         if($fromDate=$validated['from_date']??null){
-            $query->where('published_at','>=',new Carbon($fromDate));    
+            $query->where('published_at','>=',new Carbon($fromDate));
 
         }
 
         if($toDate=$validated['to_date']??null){
-            $query->where('published_at','<=',new Carbon($toDate));    
+            $query->where('published_at','<=',new Carbon($toDate));
 
         }
 
         if($tag=$validated['tag']??null){
-            $query->whereJsonContains('tags',$tag);    
+            $query->whereJsonContains('tags',$tag);
 
         }
 
@@ -56,8 +57,13 @@ class BlogController extends Controller
 
     public function show(Request $request, Post $post)
     {
-         return view ('blog.show',compact('post'));
+        $comments = Comment::where('post_id', $post->id)
+                            ->whereNull('parent_id')
+                            ->get();
+    
+        return view('blog.show', compact('post', 'comments'));
     }
+    
 
     public function like($post)
     {

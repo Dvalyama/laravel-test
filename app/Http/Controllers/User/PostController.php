@@ -69,12 +69,10 @@ class PostController extends Controller
         return back();
     }
 
-    public function delete($post)
+    public function delete(Post $post)
     {
-/*        $this->authorize('delete', $post);*/
-
         $post->delete();
-
-        return redirect()->route('user.posts');
+        return redirect()->route('user.posts')->with('success', 'Пост був успішно видалений');
     }
+
 }

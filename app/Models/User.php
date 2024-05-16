@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,13 +15,13 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     protected $attributes = [
-        'active'=>true,
-        'admin'=>false,
+        'active' => true,
+        'admin' => false,
     ];
 
     protected $fillable = [
-        'name','email','avatar',
-        'active','password',
+        'name', 'email', 'avatar',
+        'active', 'password',
     ];
 
     protected $hidden = [
@@ -33,4 +34,8 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
+    public function isAdmin(): bool
+    {
+        return $this->roles()->where('name', 'admin')->exists();
+    }
 }

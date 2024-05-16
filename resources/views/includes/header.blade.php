@@ -25,6 +25,13 @@
 
             <ul class="navbar-nav ms-auto mb-2 mb-md-0">
                 @auth
+                    @if(auth()->user()->isAdmin())
+                        <li class="nav-item">
+                            <a href="{{ route('admin.dashboard') }}" class="nav-link">
+                                {{ __('Адмін панель') }}
+                            </a>
+                        </li>
+                    @endif
 
                     <li class="nav-item">
                         <button class="btn btn-link nav-link" onclick="window.location.href='{{ route('user.posts') }}'">
@@ -39,7 +46,6 @@
                         </form>
                     </li>
                 @else
-
                     <li class="nav-item">
                         <a href="{{ route('login') }}" class="nav-link {{ active_link('login') }}" aria-current="page">
                             {{ __('Вхід') }}

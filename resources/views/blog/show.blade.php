@@ -14,4 +14,6 @@
     </x-title>
 
     {!! $post->content !!}
+
+    @include('comments.comments_block', ['post' => $post , 'comments'=>$comments])
 @endsection

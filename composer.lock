@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b0e4e559c7af998cb8ea9afbdb1505",
+    "content-hash": "a0c5835d729862a682a64b1a117ff3c0",
     "packages": [
         {
             "name": "brick/math",
@@ -1017,6 +1017,59 @@
                 }
             ],
             "time": "2023-08-27T10:19:19+00:00"
+        },
+        {
+            "name": "klisl/laravel-comments",
+            "version": "1.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/klisl/laravel-comments.git",
+                "reference": "13993c6ed1398f70799c3920fea5677acda19d12"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/klisl/laravel-comments/zipball/13993c6ed1398f70799c3920fea5677acda19d12",
+                "reference": "13993c6ed1398f70799c3920fea5677acda19d12",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Klisl\\Comments\\CommentsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Klisl\\Comments\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sergey Klimenchuk",
+                    "email": "ksl80@ukr.net",
+                    "homepage": "https://github.com/klisl/laravel-comments",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Package for using comments in Laravel-5",
+            "keywords": [
+                "comments",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/klisl/laravel-comments/issues",
+                "source": "https://github.com/klisl/laravel-comments/tree/1.8"
+            },
+            "time": "2018-04-03T13:00:43+00:00"
         },
         {
             "name": "laravel/framework",
@@ -8657,5 +8710,5 @@
         "php": "^8.0.2"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.2.0"
 }

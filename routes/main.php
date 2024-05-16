@@ -5,7 +5,7 @@ use App\Http\Controllers\TestController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\User\PostController;
-use App\Http\Controllers\Posts\CommentController;
+use App\Http\Controllers\CommentController;
 use App\Http\Middleware\CheckRolePermission;
 
 Route::view('/', 'home.index')->name('home');
@@ -35,6 +35,8 @@ Route::middleware('auth')->group(function () {
 
 
 Route::get('/access-denied', function () {
-    return view('errors.access_denied');    
+    return view('errors.access_denied');
 })->name('access.denied');
+
+
 

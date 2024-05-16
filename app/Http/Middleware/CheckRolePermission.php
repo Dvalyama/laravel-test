@@ -10,6 +10,9 @@ class CheckRolePermission
     public function handle(Request $request, Closure $next, $rolesAndPermissions)
     {
         $user = $request->user();
+        if(empty($user)){
+             return redirect()->route('access.denied');
+        }
 
         $rolesAndPermissions = is_array($rolesAndPermissions) ? $rolesAndPermissions : explode(',', $rolesAndPermissions);
 
@@ -18,7 +21,7 @@ class CheckRolePermission
                 return $next($request);
             }
         }
-
+        
         return redirect()->route('access.denied');
     }
 }
