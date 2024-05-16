@@ -15,14 +15,14 @@
 </head>
 <body>
     <div class="d-flex flex-column justify-content-between min-vh-100">
-        @include('includes.alert')
-        @include('includes.header')
+        @include('includes.alert') <!-- Включення повідомлень про сповіщення -->
+        @include('includes.header') <!-- Включення хедера -->
 
         <main class="flex-grow-1 py-3">
-            @yield('content')
+            @yield('content') <!-- Включення вмісту зі сторінки, яка розширює цей шаблон -->
         </main>
 
-        @include('includes.footer')
+        @include('includes.footer') <!-- Включення підвалу -->
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/js/bootstrap.min.js"></script>

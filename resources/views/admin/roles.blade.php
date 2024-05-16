@@ -47,23 +47,29 @@
         <a href="{{ url()->previous() }}" class="back-btn">Назад</a>
             <h1>Управління ролями</h1>
                 <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Permission</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($roles as $role)
-                <tr>
-                    <td>{{ $role->id }}</td>
-                    <td>{{ $role->name }}</td>
-                    <td>{{ $role->permission }}</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Permission</th>
+                        </tr>
+                    </thead>
+                <tbody>
+                    @foreach($roles as $role)
+                            <tr>
+                                <td>{{ $role->id }}</td>
+                                <td>{{ $role->name }}</td>
+                                <td>
+                                    <ul>
+                                        @foreach($role->permissions()->get() as $permission)
+                                        <li>{{ $permission->name }}</li>
+                                        @endforeach
+                                    </ul>
+                                </td>
+                            </tr>
+                        @endforeach
+                </tbody>
+            </table>
     </div>
 </body>
 </html>

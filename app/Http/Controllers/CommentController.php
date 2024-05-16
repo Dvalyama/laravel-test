@@ -14,7 +14,7 @@ class CommentController extends Controller
      * Store a newly created comment in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -29,7 +29,7 @@ class CommentController extends Controller
         $comment->user_id = auth()->user()->id;
         $comment->save();
 
-        return response()->json(['message' => 'Коментар успішно додано'], 201);
+        return Redirect::back()->with('success', 'Коментар успішно додано');
     }
 
     /**

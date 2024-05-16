@@ -52,6 +52,7 @@
                     <th>ID</th>
                     <th>Ім'я</th>
                     <th>Email</th>
+                    <th>Роль</th>
                 </tr>
             </thead>
             <tbody>
@@ -60,6 +61,13 @@
                         <td>{{ $user->id }}</td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
+                        <td>
+                            <ul>
+                                @foreach($user->roles as $role)
+                                    <li>{{ $role->name }}</li>
+                                @endforeach
+                            </ul>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

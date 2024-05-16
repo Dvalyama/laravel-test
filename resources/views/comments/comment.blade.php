@@ -20,9 +20,11 @@
         @can('publish comments')
             <form action="{{ route('user.comment.create') }}" method="POST">
                 @csrf
-                <textarea name="text" id="text" rows="3" required></textarea>
+                <textarea name="text" class="form-control" id="text" rows="3" required></textarea>
                 <input type="hidden" name="post_id" value="{{ $post->id }}">
-                <button type="submit">Додати коментар</button>
+                <div>
+                    <button type="submit" class="btn btn-primary  w-100">Додати коментар</button>
+                </div>
             </form>
         @endcan
     @endauth

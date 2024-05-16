@@ -29,9 +29,9 @@ Route::prefix('user')->group(function () {
         Route::delete('posts/{post}', [PostController::class, 'delete'])->name('user.posts.delete');
     });
 
-    Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->name('user.comment.delete');
-
-    Route::get('/posts/{post_id}/comments', [CommentController::class, 'showCommentsForPost'])->name('post.comments');
+    Route::group(['middleware' => ['permission: delete comments']], function () {
+        Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->name('user.comment.delete');
+    });
 
     Route::get('donates', DonateController::class)->name('user.donates');
 });

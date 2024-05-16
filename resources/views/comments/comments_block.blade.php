@@ -20,10 +20,9 @@
 
                 {{ csrf_field()}}
 
-                <div class="clear"></div>
-                <p class="form-submit">
+                <div class="form-submit">
                         <input name="submit" type="submit" id="submit" value="Відправити" />
-                </p>
+                </div>
     </form>
 
     </div>

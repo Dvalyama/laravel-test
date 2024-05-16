@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Role;
+use Spatie\Permission\Models\Role;
 
 class AdminDashboardController extends Controller
 {
@@ -25,7 +25,7 @@ class AdminDashboardController extends Controller
     {
         // Отримуємо всі ролі з бази даних
         $roles = Role::all();
-
+         
         // Передаємо дані ролей у представлення admin.roles
         return view('admin.roles', ['roles' => $roles]);
     }
