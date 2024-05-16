@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Comment extends Model
 {
     /**
-     * @var array
+     * @var array<string>
      */
     protected $fillable = ['title', 'content'];
     
