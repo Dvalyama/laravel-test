@@ -5,6 +5,7 @@ use App\Http\Controllers\User\DonateController;
 use App\Http\Controllers\User\PostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\UserController;
 
 
 Route::prefix('user')->group(function () {
@@ -29,15 +30,20 @@ Route::prefix('user')->group(function () {
         Route::delete('posts/{post}', [PostController::class, 'delete'])->name('user.posts.delete');
     });
 
-    Route::group(['middleware' => ['permission: delete comments']], function () {
+    Route::group(['middleware' => ['permission:delete comments']], function () {
         Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->name('user.comment.delete');
     });
 
     Route::get('donates', DonateController::class)->name('user.donates');
 });
 
+
 Route::prefix('admin')->middleware(['permission:access admin panel'])->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/users', [AdminDashboardController::class, 'users'])->name('admin.users');
     Route::get('/roles', [AdminDashboardController::class, 'roles'])->name('admin.roles');
+    Route::get('/user/{user}/edit', [UserController::class, 'edit'])->name('user.edit');
+Route::put('/user/{user}', [UserController::class, 'update'])->name('user.update');
 });
+Route::get('/user/{user}/edit', [UserController::class, 'edit'])->name('user.edit');
+Route::put('/user/{user}', [UserController::class, 'update'])->name('user.update');

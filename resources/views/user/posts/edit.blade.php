@@ -13,10 +13,21 @@
         </x-slot>
     </x-title>
 
-    <x-post.form action="{{route('user.posts.update', $post->id)}}" method="put" :post="$post">
-        <x-button type="submit">
-            {{__('Зберегти')}}
-        </x-button>
+    <x-post.form action="{{ route('user.posts.update', $post->id) }}" method="put" :post="$post">
+    <x-slot name="initialText">
+        {{ $post->content }}
+    </x-slot>
+
+    <x-slot name="postTitle">
+        {{ $post->title }}
+    </x-slot>
+
+    <x-button type="submit">
+        {{ __('Зберегти') }}
+    </x-button>
     </x-post.form>
+
+
+
 
 @endsection

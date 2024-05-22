@@ -22,8 +22,8 @@
                 @csrf
                 <textarea name="text" class="form-control" id="text" rows="3" required></textarea>
                 <input type="hidden" name="post_id" value="{{ $post->id }}">
-                <div>
-                    <button type="submit" class="btn btn-primary  w-100">Додати коментар</button>
+                <div class="mt-3">
+                    <button type="submit" class="btn btn-primary w-100">Додати коментар</button>
                 </div>
             </form>
         @endcan
@@ -34,19 +34,21 @@
             <li id="li-comment-{{$comment->id}}" class="comment">
                 <div id="comment-{{$comment->id}}" class="comment-container">
                     <div class="comment-author vcard">
-                        {{-- Вміст коментаря --}}
+                        <strong>{{ $comment->user->name }}</strong> {{-- Ім'я користувача --}}
+                        <span class="comment-date">
+                            {{ $comment->created_at->format('d.m.Y H:i') }} {{-- Дата та час створення --}}
+                        </span>
                     </div>
                     <div class="comment-meta commentmetadata">
-                        {{-- Вміст коментаря --}}
+                        {{-- Інші мета-дані коментаря --}}
                     </div>
                     <div class="comment-body">
-                        {{-- Вміст коментаря --}}
                         <p>{{ $comment->text }}</p>
                     </div>
                     {{-- Форма для видалення коментаря --}}
                     <div class="reply group">
                         @auth
-                            @if(Auth::user()->id === $comment->user_id)
+                            @if(Auth::user()->id === $comment->user_id || Auth::user()->can('delete comments'))
                                 <form action="{{ route('user.comment.delete', ['id' => $comment->id]) }}" method="POST" onsubmit="return confirm('Ви впевнені, що хочете видалити коментар?')">
                                     @csrf
                                     @method('DELETE')
