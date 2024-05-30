@@ -53,6 +53,7 @@
                     <th>Ім'я</th>
                     <th>Email</th>
                     <th>Роль</th>
+                    <th>Дія</th>
                 </tr>
             </thead>
             <tbody>
@@ -68,6 +69,7 @@
                                 @endforeach
                             </ul>
                         </td>
+                        <td><a href="{{ route('user.edit', $user->id) }}">Редагувати</a></td> <!-- Лінка для редагування -->
                     </tr>
                 @endforeach
             </tbody>

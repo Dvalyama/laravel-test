@@ -51,10 +51,11 @@ class CommentController extends Controller
     }
     public function showCommentsForPost($post_id)
     {
-        $comments = Comment::where('post_id', $post_id)->get();
-
+        $comments = Comment::where('post_id', $post_id)->with('user')->get();
+    
         return view('post.comments', compact('comments', 'post_id'));
     }
+    
 
     
 }

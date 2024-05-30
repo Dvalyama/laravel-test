@@ -4,8 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class Comment
@@ -15,29 +13,23 @@ class Comment extends Model
     /**
      * @var array<string>
      */
-    protected $fillable = ['title', 'content'];
+    protected $fillable = ['text', 'post_id', 'user_id'];
     
     /**
-     * Связь с моделью Post
+     * Зв'язок з моделлю Post
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function post()
+    public function post(): BelongsTo
     {
         return $this->belongsTo(Post::class);
     }
 
     /**
-     * Связь с моделью User
+     * Зв'язок з моделлю User
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
-
-    public function comments(): BelongsToMany
-    {
-        return $this->belongsToMany(Post::class, 'comments', 'post_id');
-    }
-
 }
